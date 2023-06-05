@@ -11,9 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-README.md
-README-template.md
-.gitignore
+*.md
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +23,4 @@ README-template.md
 *.njsproj
 *.sln
 *.sw?
+
