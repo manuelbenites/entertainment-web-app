@@ -1,33 +1,60 @@
-import BookmarkEmptyIcon from "../components/icons/BookmarkEmptyIcon"
+import ItemCard from "../components/ItemCard"
+import ListSearchResult from "../components/ListSearchResult"
+import Search from "../components/Search"
 import useMoviesSeriesBookmarked from "../hooks/useMoviesSeriesBookmarked"
+import useSearch from "../hooks/useSearch"
+
+function BookmarkedInitalContent({
+	itemToSearch,
+	bookmarkedMovies,
+	bookmarkedTvseries,
+}) {
+	return (
+		<>
+			{itemToSearch.length == 0 && (
+				<>
+					<section>
+						<h2 className="mb-6 font-light text-[20px]">Bookmarked Movies</h2>
+						<ul className="grid grid-cols-2 gap-[15px]">
+							{bookmarkedMovies &&
+								bookmarkedMovies.map((bookmarkedMovie, index) => (
+									<ItemCard key={index} item={bookmarkedMovie} />
+								))}
+						</ul>
+					</section>
+					<section className="mt-6">
+						<h2 className="mb-6 font-light text-[20px]">
+							Bookmarked Tv Series
+						</h2>
+						<ul className="grid grid-cols-2 gap-[15px]">
+							{bookmarkedTvseries &&
+								bookmarkedTvseries.map((bookmarkedTvserie, index) => (
+									<ItemCard key={index} item={bookmarkedTvserie} />
+								))}
+						</ul>
+					</section>
+				</>
+			)}
+		</>
+	)
+}
 
 export default function Bookmarked() {
-	const { bookmarkers } = useMoviesSeriesBookmarked()
+	const { bookmarkedMovies, bookmarkedTvseries, bookmarkedShows } =
+		useMoviesSeriesBookmarked()
+	const { itemToSearch, handleChangeFilter } = useSearch()
 	return (
-		<section className="px-4">
-			<ul className="grid grid-cols-2 gap-[15px]">
-				{bookmarkers &&
-					bookmarkers
-						.map((bookmarker, index) => (
-							<li key={index}>
-								<div className="overflow-hidden relative mb-2 rounded-md w-[164px]">
-									<img src={bookmarker.thumbnail.regular.small} />
-									<button className="inline-block absolute top-2 right-2">
-										<div className="flex relative justify-center items-center w-8 h-8">
-											<div className="h-full w-full absolute rounded-full bg-[#10141e] opacity-50"></div>
-											<BookmarkEmptyIcon />
-										</div>
-									</button>
-								</div>
-								<ul className="flex mb-1 opacity-75 text-[11px]">
-									<li>{bookmarker.year}</li>
-									<li>{bookmarker.category}</li>
-									<li>{bookmarker.rating}</li>
-								</ul>
-								<h3 className="text-sm font-medium">{bookmarker.title}</h3>
-							</li>
-						))}
-			</ul>
-		</section>
+		<>
+			<Search handleChangeFilter={handleChangeFilter} />
+			<ListSearchResult
+				itemToSearch={itemToSearch}
+				arrWhereToSearch={bookmarkedShows}
+			/>
+			<BookmarkedInitalContent
+				itemToSearch={itemToSearch}
+				bookmarkedMovies={bookmarkedMovies}
+				bookmarkedTvseries={bookmarkedTvseries}
+			/>
+		</>
 	)
 }

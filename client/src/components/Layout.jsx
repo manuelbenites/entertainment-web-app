@@ -37,11 +37,15 @@ export default function Layout() {
 						</li>
 					</ul>
 					<div>
-						<div className="w-6 h-6 rounded-full border-2 border-white"></div>
+						<div className="w-6 h-6 rounded-full border-2 border-white">
+							<img src="public/image-avatar.png" />
+						</div>
 					</div>
 				</nav>
 			</header>
-			<Outlet />
+			<main className="px-4 pb-16">
+				<Outlet />
+			</main>
 		</>
 	)
 }

@@ -1,44 +1,11 @@
-import { useState } from "react"
-import { filterArrayItems } from "../lib/utils"
+import useSearch from "../hooks/useSearch"
+import Search from "../components/Search"
+import ItemCard from "../components/ItemCard"
+import ItemCardTrending from "../components/ItemCardTrending"
+import ListSearchResult from "../components/ListSearchResult"
+import useMoviesSeriesBookmarked from "../hooks/useMoviesSeriesBookmarked"
 
-import BookmarkEmptyIcon from "../components/icons/BookmarkEmptyIcon"
-import SearchIcon from "../components/icons/SearchIcon"
-
-import data from "../../data.json"
-
-function ListSearchResult({ itemToSearch, moviesOrTvSeries }) {
-	return (
-		<section>
-			{itemToSearch.length >= 1 && (
-				<ul className="grid grid-cols-2 mb-6">
-					{
-						filterArrayItems(moviesOrTvSeries, itemToSearch)
-							.map((filteredmovie, index) => (
-								<li key={index}>
-									<div className="overflow-hidden relative mb-2 rounded-md w-[164px]">
-										<img src={filteredmovie.thumbnail.regular.small} />
-										<button className="inline-block absolute top-2 right-2">
-											<div className="flex relative justify-center items-center w-8 h-8">
-												<div className="h-full w-full absolute rounded-full bg-[#10141e] opacity-50"></div>
-												<BookmarkEmptyIcon />
-											</div>
-										</button>
-									</div>
-									<ul className="flex mb-1 opacity-75 text-[11px]">
-										<li>{filteredmovie.year}</li>
-										<li>{filteredmovie.category}</li>
-										<li>{filteredmovie.rating}</li>
-									</ul>
-									<h3 className="text-sm font-medium">{filteredmovie.title}</h3>
-								</li>
-							))}
-				</ul>
-			)}
-		</section>
-	)
-}
-
-function HomeDashBoard({ itemToSearch, moviesOrTvSeries }) {
+function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 	return (
 		<section>
 			{itemToSearch.length == 0 && (
@@ -49,25 +16,7 @@ function HomeDashBoard({ itemToSearch, moviesOrTvSeries }) {
 							{moviesOrTvSeries
 								.filter((movieOrTvSerie) => movieOrTvSerie.isTrending)
 								.map((filteredMovieOrTvSerie, index) => (
-									<li key={index} className="relative z-10">
-										<div className="overflow-hidden h-full rounded-xl w-[240px]">
-											<img src={filteredMovieOrTvSerie.thumbnail.trending.small} />
-											<button className="inline-block absolute top-2 right-2">
-												<div className="flex relative justify-center items-center w-8 h-8">
-													<div className="h-full w-full absolute rounded-full bg-[#10141e] opacity-50"></div>
-													<BookmarkEmptyIcon />
-												</div>
-											</button>
-											<div className="absolute bottom-4 left-4 z-20">
-												<ul className="flex opacity-75">
-													<li>{filteredMovieOrTvSerie.year}</li>
-													<li>{filteredMovieOrTvSerie.category}</li>
-													<li>{filteredMovieOrTvSerie.rating}</li>
-												</ul>
-												<h3 className="text-white">{filteredMovieOrTvSerie.title}</h3>
-											</div>
-										</div>
-									</li>
+									<ItemCardTrending key={index} item={filteredMovieOrTvSerie} />
 								))}
 						</ul>
 					</div>
@@ -75,23 +24,7 @@ function HomeDashBoard({ itemToSearch, moviesOrTvSeries }) {
 						<h2 className="mb-4 font-light text-[20px]">Recommended for you</h2>
 						<ul className="grid grid-cols-2 gap-[15px]">
 							{moviesOrTvSeries.map((movieOrTvSerie, index) => (
-								<li key={index}>
-									<div className="overflow-hidden relative mb-2 rounded-md w-[164px]">
-										<img src={movieOrTvSerie.thumbnail.regular.small} />
-										<button className="inline-block absolute top-2 right-2">
-											<div className="flex relative justify-center items-center w-8 h-8">
-												<div className="h-full w-full absolute rounded-full bg-[#10141e] opacity-50"></div>
-												<BookmarkEmptyIcon />
-											</div>
-										</button>
-									</div>
-									<ul className="flex mb-1 opacity-75 text-[11px]">
-										<li>{movieOrTvSerie.year}</li>
-										<li>{movieOrTvSerie.category}</li>
-										<li>{movieOrTvSerie.rating}</li>
-									</ul>
-									<h3 className="text-sm font-medium">{movieOrTvSerie.title}</h3>
-								</li>
+								<ItemCard key={index} item={movieOrTvSerie} />
 							))}
 						</ul>
 					</div>
@@ -102,27 +35,21 @@ function HomeDashBoard({ itemToSearch, moviesOrTvSeries }) {
 }
 
 export default function Home() {
-	const moviesOrTvSeries = data
-	const [itemToSearch, setItemToSearch] = useState("")
-	const handleChangeFilter = (e) => {
-		setItemToSearch(e.target.value)
-	};
+	const { allData } = useMoviesSeriesBookmarked()
+	const moviesOrTvSeries = allData
+	const { itemToSearch, handleChangeFilter } = useSearch()
 
 	return (
-		<main className="px-4">
-			<form className="flex flex-row-reverse gap-4 justify-end items-center mb-6">
-				<input
-					className="font-light border-none outline-none bg-inherit"
-					placeholder="Search for movies or TV series"
-					name="filter"
-					onChange={handleChangeFilter}
-				/>
-				<button type="button">
-					<SearchIcon />
-				</button>
-			</form>
-			<ListSearchResult moviesOrTvSeries={moviesOrTvSeries} itemToSearch={itemToSearch} />
-			<HomeDashBoard moviesOrTvSeries={moviesOrTvSeries} itemToSearch={itemToSearch} />
-		</main>
+		<>
+			<Search handleChangeFilter={handleChangeFilter} />
+			<ListSearchResult
+				itemToSearch={itemToSearch}
+				arrWhereToSearch={moviesOrTvSeries}
+			/>
+			<HomeInitialContent
+				moviesOrTvSeries={moviesOrTvSeries}
+				itemToSearch={itemToSearch}
+			/>
+		</>
 	)
 }
