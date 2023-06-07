@@ -1,8 +1,8 @@
 import ItemCard from "../components/ItemCard"
 import ListSearchResult from "../components/ListSearchResult"
 import Search from "../components/Search"
-import useMoviesSeriesBookmarked from "../hooks/useMoviesSeriesBookmarked"
-import useSearch from "../hooks/useSearch"
+import { useMovies } from "../hooks/useMovies"
+import { useSearch } from "../hooks/useSearch"
 
 function BookmarkedInitalContent({
 	itemToSearch,
@@ -39,9 +39,22 @@ function BookmarkedInitalContent({
 	)
 }
 
+const CATEGORY_PAGE_MOVIES = "Movie"
+const CATEGORY_PAGE_TVSERIES = "TV Series"
+
 export default function Bookmarked() {
-	const { bookmarkedMovies, bookmarkedTvseries, bookmarkedShows } =
-		useMoviesSeriesBookmarked()
+	const { allData } = useMovies()
+	const bookmarkedShows = allData.filter((item) => item.isBookmarked).sort()
+	const bookmarkedTvseries = allData
+		.filter(
+			(item) => item.isBookmarked && item.category == CATEGORY_PAGE_TVSERIES
+		)
+		.sort()
+	const bookmarkedMovies = allData
+		.filter(
+			(item) => item.isBookmarked && item.category == CATEGORY_PAGE_MOVIES
+		)
+		.sort()
 	const { itemToSearch, handleChangeFilter } = useSearch()
 	return (
 		<>

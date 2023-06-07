@@ -38,7 +38,7 @@ export default function Layout() {
 					</ul>
 					<div>
 						<div className="w-6 h-6 rounded-full border-2 border-white">
-							<img src="public/image-avatar.png" />
+							<img src="/image-avatar.png" />
 						</div>
 					</div>
 				</nav>

@@ -1,9 +1,9 @@
-import useSearch from "../hooks/useSearch"
+import { useSearch } from "../hooks/useSearch"
 import Search from "../components/Search"
 import ItemCard from "../components/ItemCard"
 import ItemCardTrending from "../components/ItemCardTrending"
 import ListSearchResult from "../components/ListSearchResult"
-import useMoviesSeriesBookmarked from "../hooks/useMoviesSeriesBookmarked"
+import { useMovies } from "../hooks/useMovies"
 
 function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 	return (
@@ -35,7 +35,7 @@ function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 }
 
 export default function Home() {
-	const { allData } = useMoviesSeriesBookmarked()
+	const { allData } = useMovies()
 	const moviesOrTvSeries = allData
 	const { itemToSearch, handleChangeFilter } = useSearch()
 

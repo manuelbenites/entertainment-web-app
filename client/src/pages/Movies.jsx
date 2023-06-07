@@ -1,11 +1,16 @@
 import InitialContent from "../components/InitialContent"
 import ListSearchResult from "../components/ListSearchResult"
 import Search from "../components/Search"
-import useMoviesSeriesBookmarked from "../hooks/useMoviesSeriesBookmarked"
-import useSearch from "../hooks/useSearch"
+import { useMovies } from "../hooks/useMovies"
+import { useSearch } from "../hooks/useSearch"
+
+const CATEGORY_PAGE_MOVIES = "Movie"
 
 export default function Movies() {
-	const { movies } = useMoviesSeriesBookmarked()
+	const { allData } = useMovies()
+	const movies = allData
+		.filter((item) => item.category == CATEGORY_PAGE_MOVIES)
+		.sort()
 	const { itemToSearch, handleChangeFilter } = useSearch()
 	return (
 		<>
