@@ -36,23 +36,22 @@ export default function ItemCard({ item }) {
 					className="sm:hidden"
 					src={item.thumbnail.regular.small}
 					alt={item.title}
-					loading="lazy"
 				/>
 				<LazyLoadImage
 					className="hidden sm:block lg:hidden"
 					src={item.thumbnail.regular.medium}
 					alt={item.title}
-					loading="lazy"
 				/>
 				<LazyLoadImage
 					className="hidden lg:block"
 					src={item.thumbnail.regular.large}
 					alt={item.title}
-					loading="lazy"
 				/>
 				<button
 					onClick={handleChangeIsBookmarked}
 					className="inline-block absolute top-2 right-2 z-40 sm:top-4 sm:right-4"
+					aria-label="button"
+					type="button"
 				>
 					{item.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
 				</button>
@@ -63,7 +62,7 @@ export default function ItemCard({ item }) {
 					</div>
 				</div>
 			</div>
-			<ul className="flex mb-1 font-light opacity-75 text-[11px] sm:text-[13px]">
+			<div className="flex mb-1 font-light opacity-75 text-[11px] sm:text-[13px]">
 				<ul className="flex gap-2 items-center font-light opacity-75">
 					<li>{item.year}</li>
 					<li className="bg-white rounded-full opacity-50 w-[3px] h-[3px]"></li>
@@ -74,7 +73,7 @@ export default function ItemCard({ item }) {
 					<li className="bg-white rounded-full opacity-50 w-[3px] h-[3px]"></li>
 					<li>{item.rating}</li>
 				</ul>
-			</ul>
+			</div>
 			<h3 className="text-sm font-medium sm:text-[18px]">{item.title}</h3>
 		</li>
 	)

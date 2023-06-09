@@ -45,6 +45,8 @@ export default function MovieCardTrending({ item }) {
 				<button
 					onClick={handleChangeIsBookmarked}
 					className="inline-block absolute top-2 right-2 z-40 sm:top-4 sm:right-4"
+					aria-label="button"
+					type="button"
 				>
 					{item.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
 				</button>
