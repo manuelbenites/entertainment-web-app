@@ -14,8 +14,10 @@ function BookmarkedInitalContent({
 			{itemToSearch.length == 0 && (
 				<>
 					<section>
-						<h2 className="mb-6 font-light text-[20px]">Bookmarked Movies</h2>
-						<ul className="grid grid-cols-2 gap-[15px]">
+						<h2 className="mb-6 font-light text-[20px] sm:text-[32px]">
+							Bookmarked Movies
+						</h2>
+						<ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[15px] sm:gap-[25px]">
 							{bookmarkedMovies &&
 								bookmarkedMovies.map((bookmarkedMovie, index) => (
 									<ItemCard key={index} item={bookmarkedMovie} />
@@ -23,10 +25,10 @@ function BookmarkedInitalContent({
 						</ul>
 					</section>
 					<section className="mt-6">
-						<h2 className="mb-6 font-light text-[20px]">
+						<h2 className="mb-6 font-light text-[20px] sm:text-[32px]">
 							Bookmarked Tv Series
 						</h2>
-						<ul className="grid grid-cols-2 gap-[15px]">
+						<ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[15px] sm:gap-[25px]">
 							{bookmarkedTvseries &&
 								bookmarkedTvseries.map((bookmarkedTvserie, index) => (
 									<ItemCard key={index} item={bookmarkedTvserie} />
@@ -41,6 +43,7 @@ function BookmarkedInitalContent({
 
 const CATEGORY_PAGE_MOVIES = "Movie"
 const CATEGORY_PAGE_TVSERIES = "TV Series"
+const BOOKMARKED_SEARCH_PLACEHOLDER = "Search for bookmarked shows"
 
 export default function Bookmarked() {
 	const { allData } = useMovies()
@@ -58,7 +61,10 @@ export default function Bookmarked() {
 	const { itemToSearch, handleChangeFilter } = useSearch()
 	return (
 		<>
-			<Search handleChangeFilter={handleChangeFilter} />
+			<Search
+				handleChangeFilter={handleChangeFilter}
+				placeholder={BOOKMARKED_SEARCH_PLACEHOLDER}
+			/>
 			<ListSearchResult
 				itemToSearch={itemToSearch}
 				arrWhereToSearch={bookmarkedShows}

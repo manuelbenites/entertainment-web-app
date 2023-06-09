@@ -5,14 +5,18 @@ import ItemCardTrending from "../components/ItemCardTrending"
 import ListSearchResult from "../components/ListSearchResult"
 import { useMovies } from "../hooks/useMovies"
 
+const HOME_SEARCH_PLACEHOLDER = "Searh for movies or TV series"
+
 function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 	return (
 		<section>
 			{itemToSearch.length == 0 && (
 				<>
 					<div className="mb-6">
-						<h2 className="mb-4 font-light text-[20px]">Trending</h2>
-						<ul className="flex overflow-scroll gap-4 scroll-auto">
+						<h2 className="mb-4 font-light text-[20px] sm:text-[32px]">
+							Trending
+						</h2>
+						<ul className="flex overflow-hidden gap-4 sm:gap-[40px]">
 							{moviesOrTvSeries
 								.filter((movieOrTvSerie) => movieOrTvSerie.isTrending)
 								.map((filteredMovieOrTvSerie, index) => (
@@ -21,8 +25,10 @@ function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 						</ul>
 					</div>
 					<div className="">
-						<h2 className="mb-4 font-light text-[20px]">Recommended for you</h2>
-						<ul className="grid grid-cols-2 gap-[15px]">
+						<h2 className="mb-4 font-light text-[20px] sm:text-[32px]">
+							Recommended for you
+						</h2>
+						<ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[15px] sm:gap-[25px]">
 							{moviesOrTvSeries.map((movieOrTvSerie, index) => (
 								<ItemCard key={index} item={movieOrTvSerie} />
 							))}
@@ -41,7 +47,10 @@ export default function Home() {
 
 	return (
 		<>
-			<Search handleChangeFilter={handleChangeFilter} />
+			<Search
+				handleChangeFilter={handleChangeFilter}
+				placeholder={HOME_SEARCH_PLACEHOLDER}
+			/>
 			<ListSearchResult
 				itemToSearch={itemToSearch}
 				arrWhereToSearch={moviesOrTvSeries}

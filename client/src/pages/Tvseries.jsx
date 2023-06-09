@@ -5,6 +5,7 @@ import { useMovies } from "../hooks/useMovies"
 import { useSearch } from "../hooks/useSearch"
 
 const CATEGORY_PAGE_TVSERIES = "TV Series"
+const TVSERIES_SEARCH_PLACEHOLDER = "Search for TV series"
 
 export default function Tvseries() {
 	const { allData } = useMovies()
@@ -14,7 +15,10 @@ export default function Tvseries() {
 	const { itemToSearch, handleChangeFilter } = useSearch()
 	return (
 		<>
-			<Search handleChangeFilter={handleChangeFilter} />
+			<Search
+				handleChangeFilter={handleChangeFilter}
+				placeholder={TVSERIES_SEARCH_PLACEHOLDER}
+			/>
 			<ListSearchResult
 				itemToSearch={itemToSearch}
 				arrWhereToSearch={tvseries}
