@@ -4,6 +4,7 @@ import BookmarkFullIcon from "./icons/BookmarkFullIcon"
 import TvseriesIcon from "./icons/TvseriesIcon"
 import MoviesIcon from "./icons/MoviesIcon"
 import PlayIcon from "./icons/PlayIcon"
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 export default function MovieCardTrending({ item }) {
 	const { allData, setAllData } = useMovies()
@@ -31,9 +32,14 @@ export default function MovieCardTrending({ item }) {
 	return (
 		<li className="relative z-10">
 			<div className="overflow-hidden h-full rounded-xl w-[240px] sm:w-[470px] sm:h-[230px]">
-				<img
-					className="relative z-20"
+				<LazyLoadImage
+					className="relative z-30 sm:hidden"
 					src={item.thumbnail.trending.small}
+					alt={item.title}
+				/>
+				<LazyLoadImage
+					className="hidden relative z-30 sm:block"
+					src={item.thumbnail.trending.large}
 					alt={item.title}
 				/>
 				<button
@@ -50,12 +56,12 @@ export default function MovieCardTrending({ item }) {
 							{item.category === "Movie" ? <MoviesIcon /> : <TvseriesIcon />}
 						</li>
 						<li>{item.category}</li>
-						<li className="bg-white rounded-full opacity-50 w-[3px] h-[3px]"></li>
+						<li className="bg-white rounded-full opacity-30 w-[3px] h-[3px]"></li>
 						<li>{item.rating}</li>
 					</ul>
 					<h3 className="text-white sm:text-[24px]">{item.title}</h3>
 				</div>
-				<div className="flex absolute top-0 z-30 justify-center items-center w-full h-full opacity-0 transition-opacity cursor-pointer hover:bg-black hover:bg-opacity-50 hover:opacity-100">
+				<div className="flex absolute top-0 z-30 justify-center items-center w-full h-full rounded-xl opacity-0 transition-opacity cursor-pointer hover:bg-black hover:bg-opacity-50 hover:opacity-100">
 					<div className="flex relative z-50 items-center bg-white bg-opacity-25 rounded-full w-[117px] h-[48px] p-[9px]">
 						<PlayIcon />
 						<h2 className="ml-[20px]">Play</h2>

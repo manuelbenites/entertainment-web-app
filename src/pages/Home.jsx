@@ -16,7 +16,7 @@ function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 						<h2 className="mb-4 font-light text-[20px] sm:text-[32px]">
 							Trending
 						</h2>
-						<ul className="flex overflow-hidden gap-4 sm:gap-[40px]">
+						<ul className="flex overflow-y-auto relative gap-4 sm:gap-[40px]">
 							{moviesOrTvSeries
 								.filter((movieOrTvSerie) => movieOrTvSerie.isTrending)
 								.map((filteredMovieOrTvSerie, index) => (

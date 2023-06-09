@@ -4,6 +4,7 @@ import { useMovies } from "../hooks/useMovies"
 import MoviesIcon from "./icons/MoviesIcon"
 import TvseriesIcon from "./icons/TvseriesIcon"
 import PlayIcon from "./icons/PlayIcon"
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 export default function ItemCard({ item }) {
 	const { allData, setAllData } = useMovies()
@@ -30,8 +31,25 @@ export default function ItemCard({ item }) {
 	}
 	return (
 		<li>
-			<div className="overflow-hidden relative mb-2 rounded-md min-w-[164px]">
-				<img src={item.thumbnail.regular.small} alt={item.title} />
+			<div className="overflow-hidden relative mb-2 rounded-md h-fit min-w-[164px]">
+				<LazyLoadImage
+					className="sm:hidden"
+					src={item.thumbnail.regular.small}
+					alt={item.title}
+					loading="lazy"
+				/>
+				<LazyLoadImage
+					className="hidden sm:block lg:hidden"
+					src={item.thumbnail.regular.medium}
+					alt={item.title}
+					loading="lazy"
+				/>
+				<LazyLoadImage
+					className="hidden lg:block"
+					src={item.thumbnail.regular.large}
+					alt={item.title}
+					loading="lazy"
+				/>
 				<button
 					onClick={handleChangeIsBookmarked}
 					className="inline-block absolute top-2 right-2 z-40 sm:top-4 sm:right-4"
