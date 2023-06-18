@@ -1,6 +1,6 @@
+import { useMovies } from "../hooks/useMovies"
 import BookmarkEmptyIcon from "./icons/BookmarkEmptyIcon"
 import BookmarkFullIcon from "./icons/BookmarkFullIcon"
-import { useMovies } from "../hooks/useMovies"
 import MoviesIcon from "./icons/MoviesIcon"
 import TvseriesIcon from "./icons/TvseriesIcon"
 import PlayIcon from "./icons/PlayIcon"
@@ -31,7 +31,7 @@ export default function ItemCard({ item }) {
 	}
 	return (
 		<li>
-			<div className="overflow-hidden relative mb-2 rounded-md h-fit min-w-[164px]">
+			<div className="overflow-hidden relative mb-2 w-full rounded-md">
 				<LazyLoadImage
 					className="sm:hidden"
 					src={item.thumbnail.regular.small}
@@ -51,7 +51,6 @@ export default function ItemCard({ item }) {
 					onClick={handleChangeIsBookmarked}
 					className="inline-block absolute top-2 right-2 z-40 sm:top-4 sm:right-4"
 					aria-label="button"
-					type="button"
 				>
 					{item.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
 				</button>

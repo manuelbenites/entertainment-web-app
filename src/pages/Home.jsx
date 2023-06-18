@@ -7,33 +7,43 @@ import { useMovies } from "../hooks/useMovies"
 
 const HOME_SEARCH_PLACEHOLDER = "Searh for movies or TV series"
 
+function HomeTrendingShows({ moviesOrTvSeries }) {
+	return (
+		<section className="mb-6">
+			<h2 className="mb-4 font-light text-[20px] sm:text-[32px]">Trending</h2>
+			<ul className="flex overflow-y-auto relative gap-4 sm:gap-[40px]">
+				{moviesOrTvSeries
+					.filter((movieOrTvSerie) => movieOrTvSerie.isTrending)
+					.map((filteredMovieOrTvSerie, index) => (
+						<ItemCardTrending key={index} item={filteredMovieOrTvSerie} />
+					))}
+			</ul>
+		</section>
+	)
+}
+
+function HomeAllShows({ moviesOrTvSeries }) {
+	return (
+		<section className="">
+			<h2 className="mb-4 font-light text-[20px] sm:text-[32px]">
+				Recommended for you
+			</h2>
+			<ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[15px] sm:gap-[25px]">
+				{moviesOrTvSeries.map((movieOrTvSerie, index) => (
+					<ItemCard key={index} index={index} item={movieOrTvSerie} />
+				))}
+			</ul>
+		</section>
+	)
+}
+
 function HomeInitialContent({ itemToSearch, moviesOrTvSeries }) {
 	return (
 		<section>
 			{itemToSearch.length == 0 && (
 				<>
-					<div className="mb-6">
-						<p className="mb-4 font-light text-[20px] sm:text-[32px]">
-							Trending
-						</p>
-						<ul className="flex overflow-y-auto relative gap-4 sm:gap-[40px]">
-							{moviesOrTvSeries
-								.filter((movieOrTvSerie) => movieOrTvSerie.isTrending)
-								.map((filteredMovieOrTvSerie, index) => (
-									<ItemCardTrending key={index} item={filteredMovieOrTvSerie} />
-								))}
-						</ul>
-					</div>
-					<div className="">
-						<p className="mb-4 font-light text-[20px] sm:text-[32px]">
-							Recommended for you
-						</p>
-						<ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[15px] sm:gap-[25px]">
-							{moviesOrTvSeries.map((movieOrTvSerie, index) => (
-								<ItemCard key={index} item={movieOrTvSerie} />
-							))}
-						</ul>
-					</div>
+					<HomeTrendingShows moviesOrTvSeries={moviesOrTvSeries} />
+					<HomeAllShows moviesOrTvSeries={moviesOrTvSeries} />
 				</>
 			)}
 		</section>

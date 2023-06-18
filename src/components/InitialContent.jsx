@@ -5,10 +5,10 @@ export default function InitialContent({ itemToSearch, arrToShow, titlePage }) {
 		<>
 			{itemToSearch.length == 0 && (
 				<section>
-					<p className="mb-6 font-light text-[20px] sm:text-[32px]">
+					<h2 className="mb-6 font-light text-[20px] sm:text-[32px]">
 						{titlePage}
-					</p>
-					<ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[15px] sm:gap-[25px]">
+					</h2>
+					<ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[15px] sm:gap-[25px]">
 						{arrToShow &&
 							arrToShow.map((item, index) => (
 								<ItemCard key={index} item={item} />

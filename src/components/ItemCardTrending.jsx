@@ -31,7 +31,7 @@ export default function MovieCardTrending({ item }) {
 	}
 	return (
 		<li className="relative z-10">
-			<div className="overflow-hidden h-full rounded-xl w-[240px] sm:w-[470px] sm:h-[230px]">
+			<div className="overflow-hidden h-full rounded-xl w-[240px] sm:w-[370px] md:w-[470px]">
 				<LazyLoadImage
 					className="relative z-30 sm:hidden"
 					src={item.thumbnail.trending.small}
@@ -46,7 +46,6 @@ export default function MovieCardTrending({ item }) {
 					onClick={handleChangeIsBookmarked}
 					className="inline-block absolute top-2 right-2 z-40 sm:top-4 sm:right-4"
 					aria-label="button"
-					type="button"
 				>
 					{item.isBookmarked ? <BookmarkFullIcon /> : <BookmarkEmptyIcon />}
 				</button>
