@@ -1,7 +1,7 @@
 export default function BookmarkEmptyIcon() {
 	return (
-		<div className="relative w-8 h-8">
-			<div className="h-full flex transition-all justify-center items-center w-full fill-none stroke-white hover:stroke-black absolute rounded-full bg-[#10141e] hover:bg-opacity-100 hover:bg-white bg-opacity-50">
+		<span className="block relative z-50 w-8 h-8">
+			<span className="h-full flex transition-all justify-center items-center w-full fill-none stroke-white hover:stroke-black absolute rounded-full bg-[#10141e] hover:bg-opacity-100 hover:bg-white bg-opacity-50">
 				<svg
 					className="relative z-40 opacity-100 pointer-events-none"
 					width="12"
@@ -13,7 +13,7 @@ export default function BookmarkEmptyIcon() {
 						strokeWidth="1.5"
 					/>
 				</svg>
-			</div>
-		</div>
+			</span>
+		</span>
 	)
 }

@@ -10,7 +10,7 @@ const BOOKMARKED_SEARCH_PLACEHOLDER = "Search for bookmarked shows"
 
 function BookmarkedMoviesSection({ bookmarkedMovies }) {
 	return (
-		<section>
+		<div>
 			<h2 className="mb-6 font-light text-[20px] sm:text-[32px]">
 				Bookmarked Movies
 			</h2>
@@ -20,13 +20,13 @@ function BookmarkedMoviesSection({ bookmarkedMovies }) {
 						<ItemCard key={index} item={bookmarkedMovie} />
 					))}
 			</ul>
-		</section>
+		</div>
 	)
 }
 
 function BookmarkedTVseriesSection({ bookmarkedTVseries }) {
 	return (
-		<section className="mt-6">
+		<div className="mt-6">
 			<h2 className="mb-6 font-light text-[20px] sm:text-[32px]">
 				Bookmarked Movies
 			</h2>
@@ -36,7 +36,7 @@ function BookmarkedTVseriesSection({ bookmarkedTVseries }) {
 						<ItemCard key={index} item={bookmarkedMovie} />
 					))}
 			</ul>
-		</section>
+		</div>
 	)
 }
 
